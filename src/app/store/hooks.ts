@@ -1,4 +1,3 @@
-/** Design reminder: typed hooks preserve confidence as the interface grows. */
 'use client';
 
 import { useDispatch, useSelector, useStore } from 'react-redux';

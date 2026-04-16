@@ -37,7 +37,7 @@ const Card = styled.article`
   gap: 1rem;
   padding: 1rem;
   border-radius: ${({ theme }) => theme.radii.lg};
-  background: rgba(255, 250, 244, 0.92);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
 

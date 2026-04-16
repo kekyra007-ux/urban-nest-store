@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   text-align: center;
   padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem);
   border-radius: ${({ theme }) => theme.radii.xl};
-  background: linear-gradient(180deg, rgba(255, 250, 244, 0.96) 0%, rgba(246, 239, 230, 0.85) 100%);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
 `;

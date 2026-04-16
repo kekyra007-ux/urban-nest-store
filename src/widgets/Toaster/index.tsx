@@ -65,9 +65,9 @@ const ToastItem = styled.div<{ $type: ToastType; $exiting: boolean }>`
   max-width: 360px;
   padding: 0.9rem 1rem;
   border-radius: ${({ theme }) => theme.radii.lg};
-  background: rgba(255, 250, 244, 0.97);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
-  box-shadow: 0 12px 40px rgba(53, 42, 35, 0.16), 0 2px 8px rgba(53, 42, 35, 0.08);
+  box-shadow: ${({ theme }) => theme.shadows.lifted};
   backdrop-filter: blur(12px);
   animation: ${({ $exiting }) =>
     $exiting

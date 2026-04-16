@@ -8,7 +8,7 @@ const Input = styled.input`
   min-height: 52px;
   border-radius: ${({ theme }) => theme.radii.pill};
   border: 1px solid ${({ theme }) => theme.colors.border};
-  background: rgba(255, 250, 244, 0.92);
+  background: ${({ theme }) => theme.colors.surface};
   padding: 0 1rem;
   color: ${({ theme }) => theme.colors.text};
   transition: border-color 180ms ease, box-shadow 180ms ease;

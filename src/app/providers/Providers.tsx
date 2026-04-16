@@ -9,9 +9,10 @@ import { useAppSelector, useAppStore } from '@/app/store/hooks';
 import { hydrateCart } from '@/app/store/slices/cartSlice';
 import { hydrateCatalogPreferences } from '@/app/store/slices/catalogSlice';
 import { hydrateWishlist } from '@/app/store/slices/wishlistSlice';
+import { setColorScheme } from '@/app/store/slices/uiSlice';
 import { storage } from '@/shared/lib/storage';
 import { GlobalStyles } from '@/shared/styles/global-styles';
-import { theme } from '@/shared/styles/theme';
+import { lightTheme, darkTheme } from '@/shared/styles/theme';
 
 const catalogFallback = {
   category: 'all',
@@ -27,6 +28,7 @@ function StoreSync() {
   const cartItems = useAppSelector((state) => state.cart.items);
   const wishlistIds = useAppSelector((state) => state.wishlist.ids);
   const filters = useAppSelector((state) => state.catalog.filters);
+  const colorScheme = useAppSelector((state) => state.ui.colorScheme);
 
   useEffect(() => {
     if (hydratedRef.current) {
@@ -36,6 +38,18 @@ function StoreSync() {
     store.dispatch(hydrateCart(storage.get(storage.keys.cart, [])));
     store.dispatch(hydrateWishlist(storage.get(storage.keys.wishlist, [])));
     store.dispatch(hydrateCatalogPreferences(storage.get(storage.keys.catalogPrefs, catalogFallback)));
+
+    const savedScheme = storage.get<'light' | 'dark' | null>(storage.keys.colorScheme, null);
+    if (savedScheme === 'light' || savedScheme === 'dark') {
+      store.dispatch(setColorScheme(savedScheme));
+    } else {
+      // respect OS preference on first visit
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (prefersDark) {
+        store.dispatch(setColorScheme('dark'));
+      }
+    }
+
     hydratedRef.current = true;
   }, [store]);
 
@@ -63,7 +77,28 @@ function StoreSync() {
     storage.set(storage.keys.catalogPrefs, filters);
   }, [filters]);
 
+  useEffect(() => {
+    if (!hydratedRef.current) {
+      return;
+    }
+
+    storage.set(storage.keys.colorScheme, colorScheme);
+  }, [colorScheme]);
+
   return null;
+}
+
+function ThemedShell({ children }: { children: React.ReactNode }) {
+  const colorScheme = useAppSelector((state) => state.ui.colorScheme);
+  const currentTheme = colorScheme === 'dark' ? darkTheme : lightTheme;
+
+  return (
+    <ThemeProvider theme={currentTheme}>
+      <GlobalStyles />
+      <StoreSync />
+      {children}
+    </ThemeProvider>
+  );
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -75,11 +110,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <Provider store={storeRef.current}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <StoreSync />
-        {children}
-      </ThemeProvider>
+      <ThemedShell>{children}</ThemedShell>
     </Provider>
   );
 }

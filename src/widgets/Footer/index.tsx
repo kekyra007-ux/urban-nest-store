@@ -3,6 +3,7 @@
 
 import styled from 'styled-components';
 import Container from '@/shared/ui/Container';
+import ThemeToggle from '@/shared/ui/ThemeToggle';
 
 const Shell = styled.footer`
   margin-top: 4rem;
@@ -14,6 +15,21 @@ const Grid = styled(Container)`
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+`;
+
+const ToggleRow = styled(Container)`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+  gap: 0.75rem;
+`;
+
+const ToggleLabel = styled.span`
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors.textMuted};
 `;
 
 export default function Footer() {
@@ -34,6 +50,10 @@ export default function Footer() {
           <p>+1 (415) 555-0147</p>
         </div>
       </Grid>
+      <ToggleRow>
+        <ToggleLabel>Тема оформления</ToggleLabel>
+        <ThemeToggle showLabel />
+      </ToggleRow>
     </Shell>
   );
 }

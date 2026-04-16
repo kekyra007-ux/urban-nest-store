@@ -5,7 +5,7 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
   :root {
-    color-scheme: light;
+    color-scheme: light dark;
   }
 
   * {
@@ -18,13 +18,12 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     margin: 0;
-    background:
-      radial-gradient(circle at top left, rgba(255,255,255,0.72), transparent 28%),
-      linear-gradient(180deg, #f8f2ea 0%, #f1eadf 100%);
+    background: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
     font-family: ${({ theme }) => theme.fonts.body};
     text-rendering: optimizeLegibility;
     min-height: 100vh;
+    transition: background 300ms ease, color 300ms ease;
   }
 
   body::before {
@@ -32,10 +31,10 @@ export const GlobalStyles = createGlobalStyle`
     position: fixed;
     inset: 0;
     pointer-events: none;
-    opacity: 0.08;
+    opacity: 0.06;
     background-image:
-      linear-gradient(rgba(32, 26, 23, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(32, 26, 23, 0.03) 1px, transparent 1px);
+      linear-gradient(${({ theme }) => theme.colors.border} 1px, transparent 1px),
+      linear-gradient(90deg, ${({ theme }) => theme.colors.border} 1px, transparent 1px);
     background-size: 100px 100px;
     z-index: -1;
   }

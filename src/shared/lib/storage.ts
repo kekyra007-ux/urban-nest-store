@@ -3,6 +3,7 @@ const storageKeys = {
   cart: 'urban-nest-cart',
   wishlist: 'urban-nest-wishlist',
   catalogPrefs: 'urban-nest-catalog-prefs',
+  colorScheme: 'urban-nest-color-scheme',
 } as const;
 
 function canUseStorage() {

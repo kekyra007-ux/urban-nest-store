@@ -26,7 +26,7 @@ const Card = styled.div`
   gap: 1.25rem;
   padding: 1.75rem;
   border-radius: ${({ theme }) => theme.radii.lg};
-  background: rgba(255, 250, 244, 0.92);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
 `;
@@ -148,7 +148,7 @@ const Textarea = styled.textarea`
   min-height: 160px;
   border-radius: ${({ theme }) => theme.radii.md};
   border: 1px solid ${({ theme }) => theme.colors.border};
-  background: rgba(255, 250, 244, 0.92);
+  background: ${({ theme }) => theme.colors.surface};
   padding: 1rem;
   font-family: ${({ theme }) => theme.fonts.body};
   font-size: 1rem;
@@ -181,7 +181,7 @@ const MapBlock = styled(Container)``;
 const MapPlaceholder = styled.div`
   min-height: 320px;
   border-radius: ${({ theme }) => theme.radii.lg};
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.accentSoft} 0%, rgba(246, 239, 230, 0.6) 100%);
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.accentSoft} 0%, ${({ theme }) => theme.colors.surfaceAlt} 100%);
   border: 1px solid ${({ theme }) => theme.colors.border};
   display: flex;
   flex-direction: column;

@@ -93,7 +93,7 @@ const InsightCard = styled.article`
   gap: 1.1rem;
   padding: clamp(1.3rem, 2vw, 1.75rem);
   border-radius: ${({ theme }) => theme.radii.lg};
-  background: rgba(255, 250, 244, 0.92);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
 
@@ -154,7 +154,7 @@ const SplitContent = styled.div`
   gap: 1.4rem;
   align-content: center;
   padding: clamp(1.3rem, 2vw, 2rem);
-  background: linear-gradient(180deg, rgba(255, 250, 244, 0.92) 0%, rgba(245, 237, 229, 0.84) 100%);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.radii.xl};
   box-shadow: ${({ theme }) => theme.shadows.soft};
@@ -213,7 +213,7 @@ const JournalCard = styled.article`
   grid-template-rows: minmax(280px, 340px) auto;
   border-radius: ${({ theme }) => theme.radii.xl};
   overflow: hidden;
-  background: rgba(255, 250, 244, 0.95);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
 `;

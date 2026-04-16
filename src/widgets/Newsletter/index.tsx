@@ -12,7 +12,7 @@ const Card = styled(Container)`
   gap: 1rem;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   border-radius: ${({ theme }) => theme.radii.lg};
-  background: linear-gradient(135deg, rgba(255,250,244,0.92), rgba(221,230,220,0.95));
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.surface}, ${({ theme }) => theme.colors.accentSoft});
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
 `;

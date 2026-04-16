@@ -11,7 +11,12 @@ const shimmer = keyframes`
 `;
 
 const shimmerMixin = css`
-  background: linear-gradient(120deg, rgba(255,255,255,0.35), rgba(235,228,216,0.95), rgba(255,255,255,0.35));
+  background: linear-gradient(
+    120deg,
+    ${({ theme }) => theme.colors.surfaceAlt} 0%,
+    ${({ theme }) => theme.colors.surface} 50%,
+    ${({ theme }) => theme.colors.surfaceAlt} 100%
+  );
   background-size: 200% 100%;
   animation: ${shimmer} 1.2s infinite linear;
 `;
@@ -27,7 +32,7 @@ const SkeletonCard = styled.div`
   gap: 1rem;
   padding: 1rem;
   border-radius: ${({ theme }) => theme.radii.xl};
-  background: rgba(255, 250, 244, 0.92);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
 `;

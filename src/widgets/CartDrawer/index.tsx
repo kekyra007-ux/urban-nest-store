@@ -95,7 +95,7 @@ const CloseBtn = styled.button`
   width: 40px;
   height: 40px;
   border: 1px solid ${({ theme }) => theme.colors.border};
-  background: rgba(255, 250, 244, 0.9);
+  background: ${({ theme }) => theme.colors.surfaceAlt};
   border-radius: 50%;
   font-size: 1rem;
   color: ${({ theme }) => theme.colors.textMuted};
@@ -142,7 +142,7 @@ const Item = styled.div`
   align-items: start;
   padding: 0.75rem;
   border-radius: ${({ theme }) => theme.radii.md};
-  background: rgba(246, 239, 230, 0.6);
+  background: ${({ theme }) => theme.colors.surfaceAlt};
   border: 1px solid ${({ theme }) => theme.colors.border};
 `;
 

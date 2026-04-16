@@ -10,11 +10,14 @@ export interface Toast {
   description?: string;
 }
 
+export type ColorScheme = 'light' | 'dark';
+
 interface UiState {
   mobileMenuOpen: boolean;
   filtersOpen: boolean;
   toasts: Toast[];
   cartDrawerOpen: boolean;
+  colorScheme: ColorScheme;
 }
 
 const initialState: UiState = {
@@ -22,6 +25,7 @@ const initialState: UiState = {
   filtersOpen: false,
   toasts: [],
   cartDrawerOpen: false,
+  colorScheme: 'light',
 };
 
 const uiSlice = createSlice({
@@ -57,6 +61,12 @@ const uiSlice = createSlice({
     closeCartDrawer(state) {
       state.cartDrawerOpen = false;
     },
+    setColorScheme(state, action: PayloadAction<ColorScheme>) {
+      state.colorScheme = action.payload;
+    },
+    toggleColorScheme(state) {
+      state.colorScheme = state.colorScheme === 'light' ? 'dark' : 'light';
+    },
   },
 });
 
@@ -69,5 +79,7 @@ export const {
   removeToast,
   openCartDrawer,
   closeCartDrawer,
+  setColorScheme,
+  toggleColorScheme,
 } = uiSlice.actions;
 export default uiSlice.reducer;

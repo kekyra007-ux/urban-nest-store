@@ -12,7 +12,7 @@ const Card = styled.aside`
   gap: 0;
   padding: 1.5rem;
   border-radius: ${({ theme }) => theme.radii.xl};
-  background: rgba(255, 250, 244, 0.96);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
   position: sticky;

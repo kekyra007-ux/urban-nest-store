@@ -20,7 +20,7 @@ const Toggle = styled.button<{ $active: boolean }>`
   height: 48px;
   border-radius: 50%;
   border: 1px solid ${({ $active, theme }) => ($active ? 'transparent' : theme.colors.border)};
-  background: ${({ $active, theme }) => ($active ? theme.colors.text : 'rgba(255, 250, 244, 0.9)')};
+  background: ${({ $active, theme }) => ($active ? theme.colors.text : theme.colors.surface)};
   color: ${({ $active, theme }) => ($active ? theme.colors.surface : theme.colors.text)};
   font-size: 1.15rem;
   cursor: pointer;

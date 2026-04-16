@@ -11,7 +11,7 @@ const Panel = styled.aside<{ $mobile?: boolean; $open?: boolean }>`
   align-content: start;
   padding: 1.5rem;
   border-radius: ${({ theme }) => theme.radii.lg};
-  background: rgba(255, 250, 244, 0.9);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
 

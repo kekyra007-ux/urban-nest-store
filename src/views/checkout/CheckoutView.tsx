@@ -38,7 +38,7 @@ const FormCard = styled.section`
   gap: 1.5rem;
   padding: 1.5rem;
   border-radius: ${({ theme }) => theme.radii.lg};
-  background: rgba(255, 250, 244, 0.94);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
 `;
@@ -101,7 +101,7 @@ const StyledTextarea = styled.textarea<{ $invalid?: boolean }>`
   resize: vertical;
   border-radius: ${({ theme }) => theme.radii.lg};
   border: 1px solid ${({ theme, $invalid }) => ($invalid ? theme.colors.danger : theme.colors.border)};
-  background: rgba(255, 250, 244, 0.92);
+  background: ${({ theme }) => theme.colors.surface};
   padding: 0.95rem 1rem;
   color: ${({ theme }) => theme.colors.text};
   transition: border-color 180ms ease, box-shadow 180ms ease;
@@ -133,7 +133,7 @@ const SummaryCard = styled.section`
   gap: 1rem;
   padding: 1.5rem;
   border-radius: ${({ theme }) => theme.radii.lg};
-  background: rgba(255, 250, 244, 0.96);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
   position: sticky;
@@ -164,7 +164,7 @@ const SuccessPanel = styled.section`
   max-width: 760px;
   padding: 2rem;
   border-radius: ${({ theme }) => theme.radii.lg};
-  background: rgba(255, 250, 244, 0.94);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
 `;
@@ -185,7 +185,7 @@ const GhostLink = styled(Link)`
   border: 1px solid ${({ theme }) => theme.colors.border};
   color: ${({ theme }) => theme.colors.text};
   text-decoration: none;
-  background: rgba(255, 250, 244, 0.82);
+  background: ${({ theme }) => theme.colors.surfaceAlt};
 `;
 
 function FieldControl({

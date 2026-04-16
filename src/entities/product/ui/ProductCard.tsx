@@ -15,7 +15,7 @@ const Card = styled.article`
   gap: 1rem;
   padding: 1rem;
   border-radius: ${({ theme }) => theme.radii.xl};
-  background: linear-gradient(180deg, rgba(255, 250, 244, 0.98) 0%, rgba(250, 244, 236, 0.92) 100%);
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
   transition:
@@ -53,7 +53,7 @@ const ImageWrap = styled.div`
 const ImageShade = styled.div`
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(255, 248, 240, 0) 36%, rgba(58, 42, 31, 0.08) 100%);
+  background: linear-gradient(180deg, transparent 36%, rgba(0, 0, 0, 0.14) 100%);
   pointer-events: none;
 `;
 
@@ -75,7 +75,7 @@ const Pill = styled.span`
   min-height: 2rem;
   padding: 0.35rem 0.75rem;
   border-radius: ${({ theme }) => theme.radii.pill};
-  background: rgba(255, 250, 244, 0.92);
+  background: ${({ theme }) => theme.colors.surface};
   color: ${({ theme }) => theme.colors.textPrimary};
   font-size: 0.76rem;
   letter-spacing: 0.08em;

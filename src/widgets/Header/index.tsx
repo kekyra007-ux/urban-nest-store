@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation';
 import styled, { css } from 'styled-components';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { closeMobileMenu, openCartDrawer, toggleMobileMenu } from '@/app/store/slices/uiSlice';
-import { selectCartTotals } from '@/entities/cart/model/selectors';
 import Container from '@/shared/ui/Container';
+import ThemeToggle from '@/shared/ui/ThemeToggle';
 
 /* ── Shell ── */
 
@@ -17,7 +17,8 @@ const Shell = styled.header`
   z-index: 700;
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  background: rgba(246, 240, 231, 0.86);
+  background: ${({ theme }) =>
+    theme.mode === 'dark' ? 'rgba(28, 24, 20, 0.88)' : 'rgba(246, 240, 231, 0.86)'};
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   transition: box-shadow 220ms ease;
 
@@ -68,7 +69,8 @@ const Nav = styled.nav<{ $open: boolean }>`
     gap: 0.25rem;
     padding: 0.75rem;
     border-radius: 0 0 ${({ theme }) => theme.radii.lg} ${({ theme }) => theme.radii.lg};
-    background: rgba(252, 247, 241, 0.98);
+    background: ${({ theme }) =>
+      theme.mode === 'dark' ? 'rgba(37, 32, 25, 0.98)' : 'rgba(252, 247, 241, 0.98)'};
     backdrop-filter: blur(20px);
     box-shadow: 0 24px 48px rgba(53, 42, 35, 0.12);
     border-top: 1px solid ${({ theme }) => theme.colors.border};
@@ -96,9 +98,9 @@ const Nav = styled.nav<{ $open: boolean }>`
 `;
 
 const activeLinkStyle = css`
-  background: rgba(255, 250, 244, 0.95);
+  background: ${({ theme }) => theme.colors.surfaceAlt};
   color: ${({ theme }) => theme.colors.text};
-  border-color: rgba(32, 26, 23, 0.16);
+  border-color: ${({ theme }) => theme.colors.border};
   font-weight: 600;
 `;
 
@@ -119,9 +121,9 @@ const NavLink = styled(Link)<{ $active: boolean }>`
   ${({ $active }) => $active && activeLinkStyle}
 
   &:hover {
-    background: rgba(255, 250, 244, 0.8);
+    background: ${({ theme }) => theme.colors.surfaceAlt};
     color: ${({ theme }) => theme.colors.text};
-    border-color: rgba(32, 26, 23, 0.1);
+    border-color: ${({ theme }) => theme.colors.border};
   }
 
   @media (max-width: 900px) {
@@ -156,15 +158,15 @@ const IconBtn = styled.button<{ $active?: boolean }>`
   height: 42px;
   border-radius: 50%;
   border: 1px solid ${({ $active, theme }) => ($active ? 'rgba(32,26,23,0.22)' : theme.colors.border)};
-  background: ${({ $active, theme }) => ($active ? 'rgba(255,250,244,0.95)' : 'transparent')};
+  background: ${({ $active, theme }) => ($active ? theme.colors.surfaceAlt : 'transparent')};
   color: ${({ theme }) => theme.colors.text};
   font-size: 1rem;
   cursor: pointer;
   transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
 
   &:hover {
-    background: rgba(255, 250, 244, 0.95);
-    border-color: rgba(32, 26, 23, 0.22);
+    background: ${({ theme }) => theme.colors.surfaceAlt};
+    border-color: ${({ theme }) => theme.colors.border};
     transform: scale(1.04);
   }
 `;
@@ -177,15 +179,15 @@ const IconLinkBtn = styled(Link)<{ $active?: boolean }>`
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid ${({ $active, theme }) => ($active ? 'rgba(32,26,23,0.22)' : theme.colors.border)};
-  background: ${({ $active, theme }) => ($active ? 'rgba(255,250,244,0.95)' : 'transparent')};
+  border: 1px solid ${({ $active, theme }) => ($active ? theme.colors.border : theme.colors.border)};
+  background: ${({ $active, theme }) => ($active ? theme.colors.surfaceAlt : 'transparent')};
   color: ${({ theme }) => theme.colors.text};
   font-size: 1rem;
   transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
 
   &:hover {
-    background: rgba(255, 250, 244, 0.95);
-    border-color: rgba(32, 26, 23, 0.22);
+    background: ${({ theme }) => theme.colors.surfaceAlt};
+    border-color: ${({ theme }) => theme.colors.border};
     transform: scale(1.04);
   }
 `;
@@ -206,7 +208,7 @@ const Badge = styled.span`
   align-items: center;
   justify-content: center;
   line-height: 1;
-  border: 2px solid rgba(246, 240, 231, 0.9);
+  border: 2px solid ${({ theme }) => theme.colors.background};
 `;
 
 /* ── Hamburger ── */
@@ -226,7 +228,7 @@ const HamburgerBtn = styled.button`
   transition: background 160ms ease;
 
   &:hover {
-    background: rgba(255, 250, 244, 0.95);
+    background: ${({ theme }) => theme.colors.surfaceAlt};
   }
 
   @media (max-width: 900px) {
@@ -282,7 +284,9 @@ export default function Header() {
   const dispatch = useAppDispatch();
   const mobileMenuOpen = useAppSelector((state) => state.ui.mobileMenuOpen);
   const wishlistCount = useAppSelector((state) => state.wishlist.ids.length);
-  const { totalQuantity } = useAppSelector(selectCartTotals);
+  const totalQuantity = useAppSelector((state) =>
+    state.cart.items.reduce((sum, item) => sum + item.quantity, 0),
+  );
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href);
@@ -324,6 +328,8 @@ export default function Header() {
             🛒
             {totalQuantity > 0 && <Badge>{totalQuantity > 99 ? '99+' : totalQuantity}</Badge>}
           </IconBtn>
+
+          <ThemeToggle />
 
           <HamburgerBtn
             onClick={() => dispatch(toggleMobileMenu())}

@@ -8,8 +8,14 @@ const Select = styled.select`
   min-height: 52px;
   border-radius: ${({ theme }) => theme.radii.pill};
   border: 1px solid ${({ theme }) => theme.colors.border};
-  background: rgba(255, 250, 244, 0.92);
+  background: ${({ theme }) => theme.colors.surface};
+  color: ${({ theme }) => theme.colors.text};
   padding: 0 1rem;
+
+  option {
+    background: ${({ theme }) => theme.colors.surface};
+    color: ${({ theme }) => theme.colors.text};
+  }
 `;
 
 export default function SortSelect({ value, onChange }: { value: SortOption; onChange: (value: SortOption) => void }) {
