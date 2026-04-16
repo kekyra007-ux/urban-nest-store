@@ -23,8 +23,22 @@ const shimmerMixin = css`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+  align-items: stretch;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.875rem;
+  }
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const SkeletonCard = styled.div`
@@ -38,7 +52,7 @@ const SkeletonCard = styled.div`
 `;
 
 const SkeletonImage = styled.div`
-  min-height: 280px;
+  aspect-ratio: 1 / 1;
   border-radius: ${({ theme }) => theme.radii.lg};
   ${shimmerMixin}
 `;
@@ -74,7 +88,13 @@ function ProductCardSkeleton() {
   );
 }
 
-export default function CatalogGrid({ products, loading = false }: { products: Product[]; loading?: boolean }) {
+export default function CatalogGrid({
+  products,
+  loading = false,
+}: {
+  products: Product[];
+  loading?: boolean;
+}) {
   if (loading) {
     return (
       <Grid>

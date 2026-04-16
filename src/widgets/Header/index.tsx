@@ -35,7 +35,7 @@ const Row = styled(Container)`
 
 const Brand = styled(Link)`
   font-family: ${({ theme }) => theme.fonts.display};
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   letter-spacing: -0.04em;
   flex-shrink: 0;
   color: ${({ theme }) => theme.colors.text};
@@ -45,11 +45,11 @@ const Brand = styled(Link)`
     opacity: 0.72;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 1100px) {
     font-size: 1.2rem;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 520px) {
     font-size: 1.1rem;
   }
 `;

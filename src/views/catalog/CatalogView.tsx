@@ -7,7 +7,16 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { selectCatalogMeta, selectPaginatedProducts } from '@/app/store/selectors';
-import { fetchCategories, fetchProducts, resetFilters, setCategory, setPage, setPerPage, setSearchQuery, setSort } from '@/app/store/slices/catalogSlice';
+import {
+  fetchCategories,
+  fetchProducts,
+  resetFilters,
+  setCategory,
+  setPage,
+  setPerPage,
+  setSearchQuery,
+  setSort,
+} from '@/app/store/slices/catalogSlice';
 import { closeFilters, toggleFilters } from '@/app/store/slices/uiSlice';
 import FiltersSidebar from '@/features/filters/ui/FiltersSidebar';
 import SearchBar from '@/features/search-products/ui/SearchBar';
@@ -68,10 +77,15 @@ const HeaderOverlay = styled.div`
 
 const Layout = styled.div`
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: clamp(1.25rem, 2vw, 2rem);
+  align-items: start;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1180px) {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+
+  @media (max-width: 960px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -158,7 +172,8 @@ export default function CatalogView() {
     if (category !== catalog.filters.category) dispatch(setCategory(category));
     if (sort !== catalog.filters.sort) dispatch(setSort(sort));
     if (!Number.isNaN(page) && page !== catalog.filters.page) dispatch(setPage(page));
-    if (!Number.isNaN(perPage) && perPage !== catalog.filters.perPage) dispatch(setPerPage(perPage));
+    if (!Number.isNaN(perPage) && perPage !== catalog.filters.perPage)
+      dispatch(setPerPage(perPage));
   }, [dispatch, searchParams, catalog.filters]);
 
   useEffect(() => {
@@ -188,10 +203,19 @@ export default function CatalogView() {
         <HeaderContent>
           <Badge>Curated catalog</Badge>
           <h1>Каталог</h1>
-          <p>Поиск, фильтры, сортировка и пагинация собраны в один взрослый UX-поток, но теперь поданы в более спокойной и премиальной редакционной оболочке.</p>
+          <p>
+            Поиск, фильтры, сортировка и пагинация собраны в один взрослый UX-поток, но теперь
+            поданы в более спокойной и премиальной редакционной оболочке.
+          </p>
         </HeaderContent>
         <HeaderVisual>
-          <Image src={DINING_DETAILS_IMAGE} alt="Urban Nest catalog mood" fill sizes="(max-width: 980px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
+          <Image
+            src={DINING_DETAILS_IMAGE}
+            alt="Urban Nest catalog mood"
+            fill
+            sizes="(max-width: 980px) 100vw, 40vw"
+            style={{ objectFit: 'cover' }}
+          />
           <HeaderOverlay />
         </HeaderVisual>
       </Header>
@@ -238,21 +262,30 @@ export default function CatalogView() {
               }}
             >
               {PAGE_SIZE_OPTIONS.map((option) => (
-                <option key={option} value={option}>{option} / стр.</option>
+                <option key={option} value={option}>
+                  {option} / стр.
+                </option>
               ))}
             </Select>
-            <Button $variant="secondary" onClick={() => dispatch(toggleFilters())}>Фильтры</Button>
+            <Button $variant="secondary" onClick={() => dispatch(toggleFilters())}>
+              Фильтры
+            </Button>
           </Controls>
           <Meta>
             <span>Найдено товаров: {meta.total}</span>
-            <span>Страница {meta.currentPage} из {meta.totalPages}</span>
+            <span>
+              Страница {meta.currentPage} из {meta.totalPages}
+            </span>
           </Meta>
           {catalog.status === 'failed' ? (
             <EmptyState
               icon="⚠️"
               title="Не удалось загрузить каталог"
               description={catalog.error ?? 'Что-то пошло не так. Попробуй ещё раз.'}
-              onRetry={() => { dispatch(fetchProducts()); dispatch(fetchCategories()); }}
+              onRetry={() => {
+                dispatch(fetchProducts());
+                dispatch(fetchCategories());
+              }}
               retryLabel="Попробовать снова"
               href="/catalog"
               action="Обновить страницу"
@@ -262,7 +295,10 @@ export default function CatalogView() {
               icon="🔍"
               title="Ничего не найдено"
               description="Сбрось фильтры или измени поисковый запрос, чтобы вернуть товары в подборку."
-              onRetry={() => { dispatch(resetFilters()); router.replace('/catalog'); }}
+              onRetry={() => {
+                dispatch(resetFilters());
+                router.replace('/catalog');
+              }}
               retryLabel="Сбросить фильтры"
               href="/catalog"
               action="Весь каталог"
