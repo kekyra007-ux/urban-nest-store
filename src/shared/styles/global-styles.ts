@@ -1,6 +1,5 @@
 'use client';
 
-/** Design reminder: Global styles must preserve airy spacing, quiet luxury contrast, and tactile surfaces. */
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
@@ -18,6 +17,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     margin: 0;
+    overflow-x: hidden;
     background: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
     font-family: ${({ theme }) => theme.fonts.body};

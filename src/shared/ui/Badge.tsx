@@ -11,9 +11,10 @@ const Badge = styled.span`
   border-radius: ${({ theme }) => theme.radii.pill};
   background: ${({ theme }) => theme.colors.accentSoft};
   color: ${({ theme }) => theme.colors.accent};
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-family: ${({ theme }) => theme.fonts.accent};
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 `;
 

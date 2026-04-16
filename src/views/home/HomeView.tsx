@@ -64,7 +64,12 @@ const EditorialImage = styled.div`
 const EditorialOverlay = styled.div`
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(247, 242, 235, 0.08) 0%, rgba(45, 33, 26, 0.18) 58%, rgba(31, 23, 18, 0.5) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(247, 242, 235, 0.08) 0%,
+    rgba(45, 33, 26, 0.18) 58%,
+    rgba(31, 23, 18, 0.5) 100%
+  );
 `;
 
 const EditorialContent = styled.div`
@@ -261,19 +266,35 @@ export default function HomeView() {
         <ShowroomGrid>
           <EditorialCard>
             <EditorialImage>
-              <Image src={EDITORIAL_LOUNGE_IMAGE} alt="Editorial lounge mood by Urban Nest" fill sizes="(max-width: 980px) 100vw, 58vw" style={{ objectFit: 'cover' }} />
+              <Image
+                src={EDITORIAL_LOUNGE_IMAGE}
+                alt="Editorial lounge mood by Urban Nest"
+                fill
+                sizes="(max-width: 980px) 100vw, 58vw"
+                style={{ objectFit: 'cover' }}
+              />
             </EditorialImage>
             <EditorialOverlay />
             <EditorialContent>
               <Badge>Showroom note</Badge>
-              <h2>Собираем интерьер как спокойную последовательность материалов, а не как набор случайных вещей.</h2>
+              <h2>
+                Собираем интерьер как спокойную последовательность материалов, а не как набор
+                случайных вещей.
+              </h2>
               <p>
-                Новая визуальная линия проекта делает главную страницу ближе к digital showroom: больше воздуха,
-                редакционный ритм и изображения, которые поддерживают премиальное ощущение бренда.
+                Новая визуальная линия проекта делает главную страницу ближе к digital showroom:
+                больше воздуха, редакционный ритм и изображения, которые поддерживают премиальное
+                ощущение бренда.
               </p>
               <CTAInline>
-                <Link href={routes.catalog}><Button as="span">Смотреть коллекцию</Button></Link>
-                <Link href={routes.about}><Button as="span" $variant="secondary">История бренда</Button></Link>
+                <Link href={routes.catalog}>
+                  <Button as="span">Смотреть коллекцию</Button>
+                </Link>
+                <Link href={routes.about}>
+                  <Button as="span" $variant="secondary">
+                    История бренда
+                  </Button>
+                </Link>
               </CTAInline>
             </EditorialContent>
           </EditorialCard>
@@ -283,8 +304,8 @@ export default function HomeView() {
               <Badge>Curated atmosphere</Badge>
               <h3>Домашняя среда с тёплой тактильностью и мягкой геометрией.</h3>
               <p>
-                Мы сместили акцент в сторону живых интерьерных образов, чтобы каталог ощущался не таблицей товаров,
-                а последовательной интерьерной историей с собственным характером.
+                Мы сместили акцент в сторону живых интерьерных образов, чтобы каталог ощущался не
+                таблицей товаров, а последовательной интерьерной историей с собственным характером.
               </p>
               <MiniStatGrid>
                 <MiniStat>
@@ -304,14 +325,21 @@ export default function HomeView() {
 
             <JournalCard>
               <JournalImage>
-                <Image src={CATEGORY_IMAGE} alt="Dining composition for Urban Nest" fill sizes="(max-width: 980px) 100vw, 35vw" style={{ objectFit: 'cover' }} />
+                <Image
+                  src={CATEGORY_IMAGE}
+                  alt="Dining composition for Urban Nest"
+                  fill
+                  sizes="(max-width: 980px) 100vw, 35vw"
+                  style={{ objectFit: 'cover' }}
+                />
               </JournalImage>
               <JournalBody>
                 <Badge>Dining edit</Badge>
                 <h3>Подборки по сценариям, а не только по категориям.</h3>
                 <p>
-                  От ужина на каждый день до тихого weekend breakfast — подборки становятся более понятными и
-                  эмоционально читаемыми, когда сопровождаются сильной lifestyle-подачей.
+                  От ужина на каждый день до тихого weekend breakfast — подборки становятся более
+                  понятными и эмоционально читаемыми, когда сопровождаются сильной
+                  lifestyle-подачей.
                 </p>
               </JournalBody>
             </JournalCard>
@@ -327,8 +355,8 @@ export default function HomeView() {
             <Badge>New arrivals</Badge>
             <h2>Новые поступления с более чистой визуальной подачей.</h2>
             <p>
-              Карточки и сетка каталога работают как аккуратная витрина: больше ритма, больше воздуха и более
-              премиальная типографика вокруг ключевых товарных сценариев.
+              Карточки и сетка каталога работают как аккуратная витрина: больше ритма, больше
+              воздуха и более премиальная типографика вокруг ключевых товарных сценариев.
             </p>
           </SectionIntro>
           <CatalogGrid products={newArrivals} loading={status === 'loading'} />
@@ -339,14 +367,21 @@ export default function HomeView() {
         <Container>
           <SplitVisual>
             <PortraitVisual>
-              <Image src={BEDROOM_ALCOVE_IMAGE} alt="Warm Scandinavian bedroom alcove" fill sizes="(max-width: 980px) 100vw, 42vw" style={{ objectFit: 'cover' }} />
+              <Image
+                src={BEDROOM_ALCOVE_IMAGE}
+                alt="Warm Scandinavian bedroom alcove"
+                fill
+                sizes="(max-width: 980px) 100vw, 42vw"
+                style={{ objectFit: 'cover' }}
+              />
             </PortraitVisual>
             <SplitContent>
               <Badge>Bedroom story</Badge>
               <h2>Сценарии для тихих зон дома: спальня, хранение, мягкое утро.</h2>
               <p>
-                Вместо агрессивной промо-подачи мы показываем интерьер как последовательность ощущений: приглушённый
-                свет, фактуру ткани, дерево и спокойные расстояния между элементами.
+                Вместо агрессивной промо-подачи мы показываем интерьер как последовательность
+                ощущений: приглушённый свет, фактуру ткани, дерево и спокойные расстояния между
+                элементами.
               </p>
               <BulletList>
                 <li>
@@ -355,14 +390,24 @@ export default function HomeView() {
                 </li>
                 <li>
                   <strong>Calm contrast</strong>
-                  <span>меньше визуального шума, больше уверенной иерархии заголовков и вторичного текста</span>
+                  <span>
+                    меньше визуального шума, больше уверенной иерархии заголовков и вторичного
+                    текста
+                  </span>
                 </li>
                 <li>
                   <strong>Soft commerce layer</strong>
-                  <span>бизнес-функции остаются удобными, но не перетягивают на себя всю эмоциональную подачу</span>
+                  <span>
+                    бизнес-функции остаются удобными, но не перетягивают на себя всю эмоциональную
+                    подачу
+                  </span>
                 </li>
               </BulletList>
-              <Link href={routes.catalog}><Button as="span" $variant="secondary">Перейти в каталог</Button></Link>
+              <Link href={routes.catalog}>
+                <Button as="span" $variant="secondary">
+                  Перейти в каталог
+                </Button>
+              </Link>
             </SplitContent>
           </SplitVisual>
         </Container>
@@ -374,8 +419,8 @@ export default function HomeView() {
             <Badge>Editorial picks</Badge>
             <h2>Подборка редакции с акцентом на интерьерную цельность.</h2>
             <p>
-              Здесь остаются товары с лучшим рейтингом, но теперь блок поддержан richer storytelling и сильнее связан
-              с общей art direction проекта.
+              Здесь остаются товары с лучшим рейтингом, но теперь блок поддержан richer storytelling
+              и сильнее связан с общей art direction проекта.
             </p>
           </SectionIntro>
           <CatalogGrid products={featured.slice(0, 4)} loading={status === 'loading'} />
@@ -387,31 +432,48 @@ export default function HomeView() {
           <JournalGrid>
             <JournalFeature>
               <EditorialImage>
-                <Image src={DINING_DETAILS_IMAGE} alt="Dining details styled for Urban Nest" fill sizes="(max-width: 980px) 100vw, 55vw" style={{ objectFit: 'cover' }} />
+                <Image
+                  src={DINING_DETAILS_IMAGE}
+                  alt="Dining details styled for Urban Nest"
+                  fill
+                  sizes="(max-width: 980px) 100vw, 55vw"
+                  style={{ objectFit: 'cover' }}
+                />
               </EditorialImage>
               <EditorialOverlay />
               <EditorialContent>
                 <Badge>Journal</Badge>
                 <h2>Материалы и повседневные ритуалы становятся частью интерфейса.</h2>
                 <p>
-                  Визуальный апгрейд добавляет блоки, которые связывают каталог с образом жизни: сервировка, фактуры,
-                  тёплые нейтральные сцены и более зрелый editorial balance.
+                  Визуальный апгрейд добавляет блоки, которые связывают каталог с образом жизни:
+                  сервировка, фактуры, тёплые нейтральные сцены и более зрелый editorial balance.
                 </p>
               </EditorialContent>
             </JournalFeature>
 
             <JournalCard>
               <JournalImage>
-                <Image src={STUDIO_MATERIALS_IMAGE} alt="Urban Nest material study" fill sizes="(max-width: 980px) 100vw, 38vw" style={{ objectFit: 'cover' }} />
+                <Image
+                  src={STUDIO_MATERIALS_IMAGE}
+                  alt="Urban Nest material study"
+                  fill
+                  sizes="(max-width: 980px) 100vw, 38vw"
+                  style={{ objectFit: 'cover' }}
+                />
               </JournalImage>
               <JournalBody>
                 <Badge>Craftsmanship</Badge>
-                <h3>Текстуры, палитра и материалы объясняют, почему ассортимент выглядит согласованным.</h3>
+                <h3>
+                  Текстуры, палитра и материалы объясняют, почему ассортимент выглядит
+                  согласованным.
+                </h3>
                 <p>
-                  Этот блок усиливает доверие к бренду: дерево, boucle, stone surface и нейтральная палитра работают
-                  как понятная система, а не просто как декор на фоне каталога.
+                  Этот блок усиливает доверие к бренду: дерево, boucle, stone surface и нейтральная
+                  палитра работают как понятная система, а не просто как декор на фоне каталога.
                 </p>
-                <Link href={routes.about}><Button as="span">О философии бренда</Button></Link>
+                <Link href={routes.about}>
+                  <Button as="span">О философии бренда</Button>
+                </Link>
               </JournalBody>
             </JournalCard>
           </JournalGrid>

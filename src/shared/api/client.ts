@@ -1,4 +1,3 @@
-/** Design reminder: API helpers should stay reliable and clean so the UI remains composed. */
 import { API_BASE_URL } from '@/shared/config/constants';
 
 export async function fetchJson<T>(path: string): Promise<T> {

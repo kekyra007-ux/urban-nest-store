@@ -17,6 +17,9 @@ export const productsApi = {
   },
   async getRelatedProducts(category: string, excludeId: number) {
     const response = await fetchJson<ProductListResponse>(`/products/category/${category}?limit=0`);
-    return response.products.map(mapProduct).filter((product) => product.id !== excludeId).slice(0, 4);
+    return response.products
+      .map(mapProduct)
+      .filter((product) => product.id !== excludeId)
+      .slice(0, 4);
   },
 };

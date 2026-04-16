@@ -5,6 +5,51 @@ body {
   margin: 0;
 }
 
+/* ── Local Fonts ─────────────────────────────────────────────────────────── */
+
+/* BodoniModa — display / headings */
+@font-face {
+  font-family: 'BodoniModa';
+  src: url('/fonts/BodoniModa-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BodoniModa';
+  src: url('/fonts/BodoniModa-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Roboto — body text */
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Cormorant Garamond — accent / prices / badges */
+@font-face {
+  font-family: 'CormorantGaramond';
+  src: url('/fonts/CormorantGaramond-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── Page Loader ─────────────────────────────────────────────────────────── */
 
 #__page-loader {
@@ -27,7 +72,7 @@ body {
 }
 
 .__loader-brand {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: 'BodoniModa', Georgia, serif;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   letter-spacing: -0.04em;
   color: #201a17;

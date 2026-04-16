@@ -1,5 +1,3 @@
-/** Design reminder: Warm Scandinavian digital showroom — soft cream surfaces, muted sage accents, editorial whitespace. */
-
 const shared = {
   radii: {
     sm: '12px',
@@ -28,8 +26,9 @@ const shared = {
     lifted: '0 30px 80px rgba(72, 57, 47, 0.14)',
   },
   fonts: {
-    body: 'var(--font-body), system-ui, sans-serif',
-    display: 'var(--font-display), Georgia, serif',
+    body: 'Roboto, system-ui, sans-serif',
+    display: 'BodoniModa, Georgia, serif',
+    accent: 'CormorantGaramond, Georgia, serif',
   },
 } as const;
 

@@ -28,8 +28,12 @@ const initialState: CatalogState = {
   error: null,
 };
 
-export const fetchProducts = createAsyncThunk('catalog/fetchProducts', async () => productsApi.getAllProducts());
-export const fetchCategories = createAsyncThunk('catalog/fetchCategories', async () => productsApi.getCategories());
+export const fetchProducts = createAsyncThunk('catalog/fetchProducts', async () =>
+  productsApi.getAllProducts(),
+);
+export const fetchCategories = createAsyncThunk('catalog/fetchCategories', async () =>
+  productsApi.getCategories(),
+);
 
 const catalogSlice = createSlice({
   name: 'catalog',
@@ -91,6 +95,13 @@ const catalogSlice = createSlice({
   },
 });
 
-export const { setCategory, setSearchQuery, setSort, setPage, setPerPage, resetFilters, hydrateCatalogPreferences } =
-  catalogSlice.actions;
+export const {
+  setCategory,
+  setSearchQuery,
+  setSort,
+  setPage,
+  setPerPage,
+  resetFilters,
+  hydrateCatalogPreferences,
+} = catalogSlice.actions;
 export default catalogSlice.reducer;

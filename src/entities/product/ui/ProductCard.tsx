@@ -77,8 +77,9 @@ const Pill = styled.span`
   border-radius: ${({ theme }) => theme.radii.pill};
   background: ${({ theme }) => theme.colors.surface};
   color: ${({ theme }) => theme.colors.textPrimary};
-  font-size: 0.76rem;
-  letter-spacing: 0.08em;
+  font-family: ${({ theme }) => theme.fonts.accent};
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   backdrop-filter: blur(8px);
 `;
@@ -97,9 +98,10 @@ const Meta = styled.div`
 `;
 
 const Category = styled.span`
-  font-size: 0.74rem;
+  font-family: ${({ theme }) => theme.fonts.accent};
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   color: ${({ theme }) => theme.colors.textMuted};
 `;
 

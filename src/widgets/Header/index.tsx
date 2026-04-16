@@ -9,8 +9,6 @@ import { closeMobileMenu, openCartDrawer, toggleMobileMenu } from '@/app/store/s
 import Container from '@/shared/ui/Container';
 import ThemeToggle from '@/shared/ui/ThemeToggle';
 
-/* ── Shell ── */
-
 const Shell = styled.header`
   position: sticky;
   top: 0;
@@ -35,8 +33,6 @@ const Row = styled(Container)`
   min-height: 72px;
 `;
 
-/* ── Brand ── */
-
 const Brand = styled(Link)`
   font-family: ${({ theme }) => theme.fonts.display};
   font-size: 1.35rem;
@@ -47,6 +43,14 @@ const Brand = styled(Link)`
 
   &:hover {
     opacity: 0.72;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
   }
 `;
 
@@ -78,7 +82,10 @@ const Nav = styled.nav<{ $open: boolean }>`
     border-right: 1px solid ${({ theme }) => theme.colors.border};
 
     transform-origin: top center;
-    transition: opacity 200ms ease, transform 200ms cubic-bezier(0.22, 1, 0.36, 1), visibility 200ms;
+    transition:
+      opacity 200ms ease,
+      transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 200ms;
 
     ${({ $open }) =>
       $open
@@ -115,7 +122,10 @@ const NavLink = styled(Link)<{ $active: boolean }>`
   font-size: 0.9rem;
   font-weight: 500;
   color: ${({ $active, theme }) => ($active ? theme.colors.text : theme.colors.textMuted)};
-  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
   white-space: nowrap;
 
   ${({ $active }) => $active && activeLinkStyle}
@@ -157,12 +167,16 @@ const IconBtn = styled.button<{ $active?: boolean }>`
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid ${({ $active, theme }) => ($active ? 'rgba(32,26,23,0.22)' : theme.colors.border)};
+  border: 1px solid
+    ${({ $active, theme }) => ($active ? 'rgba(32,26,23,0.22)' : theme.colors.border)};
   background: ${({ $active, theme }) => ($active ? theme.colors.surfaceAlt : 'transparent')};
   color: ${({ theme }) => theme.colors.text};
   font-size: 1rem;
   cursor: pointer;
-  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
 
   &:hover {
     background: ${({ theme }) => theme.colors.surfaceAlt};
@@ -183,7 +197,10 @@ const IconLinkBtn = styled(Link)<{ $active?: boolean }>`
   background: ${({ $active, theme }) => ($active ? theme.colors.surfaceAlt : 'transparent')};
   color: ${({ theme }) => theme.colors.text};
   font-size: 1rem;
-  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
 
   &:hover {
     background: ${({ theme }) => theme.colors.surfaceAlt};
@@ -215,16 +232,15 @@ const Badge = styled.span`
 
 const HamburgerBtn = styled.button`
   display: none;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 5px;
   width: 42px;
   height: 42px;
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 50%;
   background: transparent;
+  color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
-  align-items: center;
   transition: background 160ms ease;
 
   &:hover {
@@ -236,36 +252,29 @@ const HamburgerBtn = styled.button`
   }
 `;
 
-const Bar = styled.span<{ $open: boolean; $index: number }>`
-  display: block;
-  width: 18px;
-  height: 1.5px;
-  background: ${({ theme }) => theme.colors.text};
-  border-radius: 2px;
-  transform-origin: center;
-  transition: transform 220ms ease, opacity 220ms ease, width 220ms ease;
+/* ── Desktop-only wrapper for theme toggle ── */
 
-  ${({ $open, $index }) =>
-    $open &&
-    $index === 0 &&
-    css`
-      transform: translateY(6.5px) rotate(45deg);
-    `}
+const DesktopThemeToggle = styled.div`
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
 
-  ${({ $open, $index }) =>
-    $open &&
-    $index === 1 &&
-    css`
-      opacity: 0;
-      width: 0;
-    `}
+/* ── Theme row inside mobile nav ── */
 
-  ${({ $open, $index }) =>
-    $open &&
-    $index === 2 &&
-    css`
-      transform: translateY(-6.5px) rotate(-45deg);
-    `}
+const MobileThemeRow = styled.div`
+  display: none;
+
+  @media (max-width: 900px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1rem;
+    margin-top: 0.375rem;
+    border-top: 1px solid ${({ theme }) => theme.colors.border};
+    color: ${({ theme }) => theme.colors.textMuted};
+    font-size: 0.875rem;
+  }
 `;
 
 /* ── Nav links config ── */
@@ -277,8 +286,6 @@ const MAIN_LINKS = [
   { label: 'Контакты', href: '/contacts' },
 ] as const;
 
-/* ── Component ── */
-
 export default function Header() {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
@@ -288,13 +295,14 @@ export default function Header() {
     state.cart.items.reduce((sum, item) => sum + item.quantity, 0),
   );
 
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname.startsWith(href);
+  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 
   return (
     <Shell>
       <Row>
-        <Brand href="/" onClick={() => dispatch(closeMobileMenu())}>Urban Nest</Brand>
+        <Brand href="/" onClick={() => dispatch(closeMobileMenu())}>
+          Urban Nest
+        </Brand>
 
         <Nav $open={mobileMenuOpen}>
           {MAIN_LINKS.map((item) => (
@@ -308,6 +316,10 @@ export default function Header() {
               {item.label}
             </NavLink>
           ))}
+          <MobileThemeRow>
+            <span>Тема оформления</span>
+            <ThemeToggle />
+          </MobileThemeRow>
         </Nav>
 
         <Actions>
@@ -329,16 +341,34 @@ export default function Header() {
             {totalQuantity > 0 && <Badge>{totalQuantity > 99 ? '99+' : totalQuantity}</Badge>}
           </IconBtn>
 
-          <ThemeToggle />
+          <DesktopThemeToggle>
+            <ThemeToggle />
+          </DesktopThemeToggle>
 
           <HamburgerBtn
             onClick={() => dispatch(toggleMobileMenu())}
             aria-label={mobileMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
             aria-expanded={mobileMenuOpen}
           >
-            <Bar $open={mobileMenuOpen} $index={0} />
-            <Bar $open={mobileMenuOpen} $index={1} />
-            <Bar $open={mobileMenuOpen} $index={2} />
+            {mobileMenuOpen ? (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path
+                  d="M2 2L14 14M14 2L2 14"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                />
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path
+                  d="M2 5H14M2 11H14"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                />
+              </svg>
+            )}
           </HamburgerBtn>
         </Actions>
       </Row>

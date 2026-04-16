@@ -47,6 +47,7 @@ declare module 'styled-components' {
     fonts: {
       body: string;
       display: string;
+      accent: string;
     };
   }
 }

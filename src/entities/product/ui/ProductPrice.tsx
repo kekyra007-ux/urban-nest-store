@@ -11,10 +11,15 @@ const Price = styled.div`
 `;
 
 const Current = styled.strong`
-  font-size: 1.25rem;
+  font-family: ${({ theme }) => theme.fonts.accent};
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 `;
 
 const Discount = styled.span`
+  font-family: ${({ theme }) => theme.fonts.accent};
+  font-size: 1rem;
   color: ${({ theme }) => theme.colors.textMuted};
 `;
 
