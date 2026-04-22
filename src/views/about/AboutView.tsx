@@ -84,31 +84,131 @@ const StoryGrid = styled(Container)`
 
 const BenefitsGrid = styled(Container)`
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(1rem, 1.8vw, 1.35rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+
+  @media (max-width: 1180px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const BenefitCard = styled.article`
+  position: relative;
   display: grid;
-  gap: 0.75rem;
-  padding: 1.5rem;
+  grid-template-rows: auto auto auto;
+  align-content: start;
+  gap: 1rem;
+  min-width: 0;
+
+  padding: clamp(1.2rem, 2vw, 1.6rem);
   border-radius: ${({ theme }) => theme.radii.lg};
-  background: ${({ theme }) => theme.colors.surface};
+  background: color-mix(in srgb, ${({ theme }) => theme.colors.surface} 97%, transparent);
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
+
   transition:
-    transform 220ms ease,
-    box-shadow 220ms ease;
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease;
 
   &:hover {
-    transform: translateY(-4px);
+    border-color: color-mix(
+      in srgb,
+      ${({ theme }) => theme.colors.accent} 14%,
+      ${({ theme }) => theme.colors.border}
+    );
     box-shadow: ${({ theme }) => theme.shadows.card};
+    background: color-mix(in srgb, ${({ theme }) => theme.colors.surface} 99%, transparent);
+  }
+
+  @media (max-width: 640px) {
+    gap: 0.9rem;
+    padding: 1rem;
+    border-radius: ${({ theme }) => theme.radii.md};
+  }
+`;
+
+const BenefitTop = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+`;
+
+const BenefitKicker = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  min-height: 2rem;
+  padding: 0.34rem 0.8rem;
+  border-radius: ${({ theme }) => theme.radii.pill};
+  background: color-mix(in srgb, ${({ theme }) => theme.colors.surfaceAlt} 78%, transparent);
+  color: ${({ theme }) => theme.colors.textMuted};
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  @media (max-width: 640px) {
+    min-height: 1.9rem;
+    padding: 0.3rem 0.72rem;
+    font-size: 0.7rem;
   }
 `;
 
 const BenefitIcon = styled.div`
-  font-size: 2rem;
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+
+  background: color-mix(in srgb, ${({ theme }) => theme.colors.surfaceAlt} 88%, transparent);
+  border: 1px solid color-mix(in srgb, ${({ theme }) => theme.colors.border} 86%, transparent);
+
+  font-size: 1.15rem;
   line-height: 1;
+  color: ${({ theme }) => theme.colors.text};
+
+  @media (max-width: 640px) {
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 1rem;
+  }
+`;
+
+const BenefitTitle = styled.h3`
+  margin: 0;
+  max-width: 18ch;
+  font-size: clamp(1.06rem, 1.18vw, 1.22rem);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: ${({ theme }) => theme.colors.text};
+
+  @media (max-width: 640px) {
+    max-width: 100%;
+    font-size: 1.04rem;
+  }
+`;
+
+const BenefitText = styled.p`
+  margin: 0;
+  max-width: 30ch;
+  color: ${({ theme }) => theme.colors.textMuted};
+  font-size: 0.96rem;
+  line-height: 1.58;
+
+  @media (max-width: 640px) {
+    max-width: 100%;
+    font-size: 0.92rem;
+    line-height: 1.52;
+  }
 `;
 
 /* ── Values ── */
@@ -338,52 +438,39 @@ export default function AboutView() {
         </Container>
         <BenefitsGrid>
           <BenefitCard>
-            <BenefitIcon>✦</BenefitIcon>
-            <h3>Ручной отбор</h3>
-            <p>
-              Каждый товар в каталоге прошёл живой тест: наша команда проверяет качество материала,
-              сборки и упаковки перед тем, как артикул попадает на сайт.
-            </p>
+            <BenefitTop>
+              <BenefitKicker>Showroom logic</BenefitKicker>
+              <BenefitIcon>✦</BenefitIcon>
+            </BenefitTop>
+            <BenefitTitle>Спокойная навигация по каталогу</BenefitTitle>
+            <BenefitText>
+              Карточки, фильтры и визуальные акценты выстроены так, чтобы интерфейс ощущался
+              последовательным и лёгким для просмотра.
+            </BenefitText>
           </BenefitCard>
+
           <BenefitCard>
-            <BenefitIcon>◻</BenefitIcon>
-            <h3>Лаконичная эстетика</h3>
-            <p>
-              Мы работаем только с дизайнерами, которые убирают лишнее, а не добавляют. Форма
-              следует за функцией, тектура — за атмосферой.
-            </p>
+            <BenefitTop>
+              <BenefitKicker>Material tone</BenefitKicker>
+              <BenefitIcon>◌</BenefitIcon>
+            </BenefitTop>
+            <BenefitTitle>Тактильная и мягкая визуальная система</BenefitTitle>
+            <BenefitText>
+              Светлые поверхности, аккуратные границы и спокойные тени создают ощущение бытовой
+              роскоши без перегруженности.
+            </BenefitText>
           </BenefitCard>
+
           <BenefitCard>
-            <BenefitIcon>↻</BenefitIcon>
-            <h3>Осознанное производство</h3>
-            <p>
-              Приоритет — материалы с сертификатами экологичности, местные производства и бренды с
-              прозрачной цепочкой поставок.
-            </p>
-          </BenefitCard>
-          <BenefitCard>
-            <BenefitIcon>◑</BenefitIcon>
-            <h3>Живая поддержка</h3>
-            <p>
-              Никаких ботов — только реальные люди. Наши консультанты помогут подобрать мебель под
-              конкретную комнату или бюджет.
-            </p>
-          </BenefitCard>
-          <BenefitCard>
-            <BenefitIcon>⊞</BenefitIcon>
-            <h3>Гибкий возврат</h3>
-            <p>
-              14 дней на решение — без лишних вопросов. Мы забираем товар самостоятельно и
-              возвращаем деньги в течение 3 рабочих дней.
-            </p>
-          </BenefitCard>
-          <BenefitCard>
-            <BenefitIcon>♦</BenefitIcon>
-            <h3>Дизайн-консультации</h3>
-            <p>
-              Каждый покупатель может записаться на бесплатную 30-минутную видеосессию с нашим
-              интерьерным консультантом.
-            </p>
+            <BenefitTop>
+              <BenefitKicker>Commerce clarity</BenefitKicker>
+              <BenefitIcon>↗</BenefitIcon>
+            </BenefitTop>
+            <BenefitTitle>Баланс эстетики и коммерческой ясности</BenefitTitle>
+            <BenefitText>
+              Интерфейс остаётся выразительным, но не мешает выбору товара, чтению карточек и
+              ключевым пользовательским действиям.
+            </BenefitText>
           </BenefitCard>
         </BenefitsGrid>
       </Section>
@@ -427,24 +514,26 @@ export default function AboutView() {
           <div
             style={{
               position: 'relative',
-              minHeight: '420px',
+              aspectRatio: '16 / 6.2',
+              minHeight: 'unset',
               borderRadius: '32px',
               overflow: 'hidden',
               boxShadow: '0 30px 80px rgba(72,57,47,0.14)',
             }}
           >
             <Image
-              src={STUDIO_MATERIALS_IMAGE}
+              src={STORY_IMAGE}
               alt="Studio materials"
               fill
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: 'cover', objectPosition: 'center center' }}
               sizes="100vw"
             />
             <div
               style={{
                 position: 'absolute',
                 inset: 0,
-                background: 'linear-gradient(90deg, rgba(32,26,23,0.55) 0%, rgba(32,26,23,0) 60%)',
+                background:
+                  'linear-gradient(90deg, rgba(32, 26, 23, 0.83) 0%, rgba(32, 26, 23, 0.49) 30%, rgba(32,26,23,0) 62%)',
                 display: 'flex',
                 alignItems: 'center',
               }}
@@ -469,7 +558,6 @@ export default function AboutView() {
           </div>
         </Container>
       </Section>
-
       {/* FAQ */}
       <Section>
         <Container>

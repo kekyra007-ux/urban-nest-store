@@ -28,19 +28,24 @@ import { routes } from '@/shared/config/routes';
 
 const SectionIntro = styled.div`
   display: grid;
-  gap: 0.75rem;
-  max-width: 42rem;
-  margin-bottom: 1.75rem;
+  gap: 0.85rem;
+  max-width: 46rem;
+  margin-bottom: clamp(1.5rem, 2.6vw, 2.4rem);
+
+  @media (max-width: 640px) {
+    gap: 0.7rem;
+    margin-bottom: 1.25rem;
+  }
 `;
 
 const ShowroomSection = styled(Section)`
-  padding-top: 0.5rem;
+  padding-top: clamp(0.5rem, 1.2vw, 1rem);
 `;
 
 const ShowroomGrid = styled(Container)`
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
   align-items: stretch;
 
   @media (max-width: 980px) {
@@ -50,28 +55,61 @@ const ShowroomGrid = styled(Container)`
 
 const EditorialCard = styled.article`
   position: relative;
-  min-height: 620px;
+  min-height: clamp(520px, 56vw, 700px);
   border-radius: ${({ theme }) => theme.radii.xl};
   overflow: hidden;
   box-shadow: ${({ theme }) => theme.shadows.lifted};
+
+  @media (max-width: 980px) {
+    min-height: 560px;
+  }
+
+  @media (max-width: 640px) {
+    min-height: 460px;
+    border-radius: ${({ theme }) => theme.radii.lg};
+  }
 `;
 
 const EditorialImage = styled.div`
   position: absolute;
   inset: 0;
 `;
-
 const EditorialOverlay = styled.div`
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(247, 242, 235, 0.08) 0%,
-    rgba(45, 33, 26, 0.18) 58%,
-    rgba(31, 23, 18, 0.5) 100%
-  );
-`;
 
+  background:
+    linear-gradient(
+      to top,
+      rgba(32, 26, 23, 0.76) 0%,
+      rgba(32, 26, 23, 0.35) 30%,
+      rgba(32, 26, 23, 0.12) 55%,
+      rgba(32, 26, 23, 0) 75%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(247, 242, 235, 0.04) 0%,
+      rgba(45, 33, 26, 0.14) 58%,
+      rgba(31, 23, 18, 0.46) 100%
+    );
+
+  @media (max-width: 640px) {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(32, 26, 23, 0.76) 0%,
+        rgba(32, 26, 23, 0.56) 30%,
+        rgba(32, 26, 23, 0.48) 55%,
+        rgba(32, 26, 23, 0.33) 75%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(247, 242, 235, 0.04) 0%,
+        rgba(45, 33, 26, 0.14) 58%,
+        rgba(31, 23, 18, 0.46) 100%
+      );
+  }
+`;
 const EditorialContent = styled.div`
   position: relative;
   z-index: 1;
@@ -79,66 +117,100 @@ const EditorialContent = styled.div`
   align-content: end;
   gap: 1rem;
   min-height: 100%;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.4rem, 3vw, 2.5rem);
   color: ${({ theme }) => theme.colors.surface};
 
-  p {
-    max-width: 28rem;
+  h2 {
     color: rgba(255, 249, 243, 0.86);
+  }
+
+  p {
+    max-width: 30rem;
+    color: rgba(255, 249, 243, 0.86);
+  }
+
+  @media (max-width: 640px) {
+    gap: 0.85rem;
+    padding: 1.15rem;
+
+    h2 {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 12px;
+    }
   }
 `;
 
 const EditorialAside = styled.div`
   display: grid;
-  gap: 1.5rem;
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+  align-content: start;
+  min-width: 0;
 `;
 
 const InsightCard = styled.article`
   display: grid;
-  gap: 1.1rem;
-  padding: clamp(1.3rem, 2vw, 1.75rem);
+  gap: 1rem;
+  padding: clamp(1.1rem, 1.8vw, 1.6rem);
   border-radius: ${({ theme }) => theme.radii.lg};
-  background: ${({ theme }) => theme.colors.surface};
+  background: color-mix(in srgb, ${({ theme }) => theme.colors.surface} 96%, transparent);
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
+  min-width: 0;
 
   p {
-    max-width: 30rem;
+    max-width: 34rem;
+  }
+
+  @media (max-width: 640px) {
+    gap: 0.8rem;
+    padding: 1rem;
   }
 `;
-
 const MiniStatGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 0.85rem;
-
-  @media (max-width: 680px) {
-    grid-template-columns: 1fr;
-  }
+  align-items: start;
 `;
 
 const MiniStat = styled.div`
-  padding: 1rem;
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+  min-width: 0;
+
+  padding: 1rem 1rem 1.05rem;
   border-radius: ${({ theme }) => theme.radii.md};
-  background: ${({ theme }) => theme.colors.surface};
+  background: color-mix(in srgb, ${({ theme }) => theme.colors.surface} 98%, transparent);
   border: 1px solid ${({ theme }) => theme.colors.border};
 
   strong {
     display: block;
-    margin-bottom: 0.35rem;
-    font-size: 1.15rem;
+    margin: 0;
+    font-size: 1.02rem;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
   }
 
   span {
     color: ${({ theme }) => theme.colors.textMuted};
-    font-size: 0.95rem;
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 640px) {
+    padding: 0.95rem;
   }
 `;
 
 const SplitVisual = styled.article`
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  gap: 1.5rem;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
   align-items: stretch;
 
   @media (max-width: 980px) {
@@ -148,33 +220,48 @@ const SplitVisual = styled.article`
 
 const PortraitVisual = styled.div`
   position: relative;
-  min-height: 560px;
+  min-height: clamp(420px, 48vw, 600px);
   border-radius: ${({ theme }) => theme.radii.xl};
   overflow: hidden;
   box-shadow: ${({ theme }) => theme.shadows.card};
+
+  @media (max-width: 980px) {
+    min-height: 420px;
+  }
+
+  @media (max-width: 640px) {
+    min-height: 340px;
+    border-radius: ${({ theme }) => theme.radii.lg};
+  }
 `;
 
 const SplitContent = styled.div`
   display: grid;
-  gap: 1.4rem;
+  gap: 1.25rem;
   align-content: center;
-  padding: clamp(1.3rem, 2vw, 2rem);
+  padding: clamp(1.2rem, 2.1vw, 2rem);
   background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.radii.xl};
   box-shadow: ${({ theme }) => theme.shadows.soft};
+
+  @media (max-width: 640px) {
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: ${({ theme }) => theme.radii.lg};
+  }
 `;
 
 const BulletList = styled.ul`
   display: grid;
-  gap: 0.85rem;
+  gap: 0.9rem;
   padding: 0;
   margin: 0;
   list-style: none;
 
   li {
     display: grid;
-    gap: 0.2rem;
+    gap: 0.24rem;
     padding-left: 1.15rem;
     position: relative;
   }
@@ -183,9 +270,9 @@ const BulletList = styled.ul`
     content: '';
     position: absolute;
     left: 0;
-    top: 0.6rem;
-    width: 0.45rem;
-    height: 0.45rem;
+    top: 0.58rem;
+    width: 0.42rem;
+    height: 0.42rem;
     border-radius: 999px;
     background: ${({ theme }) => theme.colors.accent};
   }
@@ -193,12 +280,17 @@ const BulletList = styled.ul`
   span {
     color: ${({ theme }) => theme.colors.textMuted};
   }
+
+  @media (max-width: 640px) {
+    gap: 0.8rem;
+  }
 `;
 
 const JournalGrid = styled.div`
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  align-items: stretch;
 
   @media (max-width: 980px) {
     grid-template-columns: 1fr;
@@ -207,32 +299,51 @@ const JournalGrid = styled.div`
 
 const JournalFeature = styled.article`
   position: relative;
-  min-height: 500px;
+  min-height: clamp(380px, 46vw, 540px);
   border-radius: ${({ theme }) => theme.radii.xl};
   overflow: hidden;
   box-shadow: ${({ theme }) => theme.shadows.card};
+
+  @media (max-width: 640px) {
+    min-height: 320px;
+    border-radius: ${({ theme }) => theme.radii.lg};
+  }
 `;
 
 const JournalCard = styled.article`
   display: grid;
-  grid-template-rows: minmax(280px, 340px) auto;
+  grid-template-rows: minmax(240px, 320px) auto;
   border-radius: ${({ theme }) => theme.radii.xl};
   overflow: hidden;
   background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.soft};
+
+  @media (max-width: 640px) {
+    grid-template-rows: 220px auto;
+    border-radius: ${({ theme }) => theme.radii.lg};
+  }
 `;
 
 const JournalImage = styled.div`
   position: relative;
-  min-height: 280px;
+  min-height: 240px;
   overflow: hidden;
+
+  @media (max-width: 640px) {
+    min-height: 220px;
+  }
 `;
 
 const JournalBody = styled.div`
   display: grid;
   gap: 0.9rem;
   padding: 1.35rem;
+
+  @media (max-width: 640px) {
+    gap: 0.8rem;
+    padding: 1rem;
+  }
 `;
 
 const CTAInline = styled.div`
@@ -240,6 +351,13 @@ const CTAInline = styled.div`
   flex-wrap: wrap;
   gap: 0.9rem;
   align-items: center;
+
+  @media (max-width: 640px) {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
 `;
 
 export default function HomeView() {
@@ -267,11 +385,14 @@ export default function HomeView() {
           <EditorialCard>
             <EditorialImage>
               <Image
-                src={EDITORIAL_LOUNGE_IMAGE}
+                src={BEDROOM_ALCOVE_IMAGE}
                 alt="Editorial lounge mood by Urban Nest"
                 fill
                 sizes="(max-width: 980px) 100vw, 58vw"
-                style={{ objectFit: 'cover' }}
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: '-1% center',
+                }}
               />
             </EditorialImage>
             <EditorialOverlay />

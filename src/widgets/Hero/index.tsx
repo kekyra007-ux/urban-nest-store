@@ -111,7 +111,7 @@ const Content = styled.div`
 `;
 
 const Card = styled.div`
-  max-width: clamp(380px, 50%, 1040px);
+  max-width: clamp(380px, 50%, 1200px);
 
   padding: clamp(1.75rem, 2.8vw, 2.75rem) clamp(1.75rem, 3.2vw, 3rem);
   border-radius: 28px;
@@ -157,7 +157,7 @@ const Title = styled.h1`
   margin: 0;
   font-family: ${({ theme }) => theme.fonts.display};
 
-  font-size: clamp(2.4rem, 3.6vw, 4.8rem);
+  font-size: clamp(2.4rem, 4vw, 6rem);
   line-height: 0.92;
   letter-spacing: -0.04em;
   text-wrap: balance;
@@ -184,7 +184,7 @@ const Title = styled.h1`
 `;
 const Lead = styled.p`
   margin: 1rem 0 0;
-  max-width: 44ch;
+  max-width: 100%;
 
   font-size: clamp(0.94rem, 1.25vw, 1.12rem);
   line-height: 1.72;
