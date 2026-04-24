@@ -6,9 +6,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const nextConfig = {
   outputFileTracingRoot: __dirname,
-  compiler: {
-    styledComponents: true,
-  },
   images: {
     remotePatterns: [
       {
