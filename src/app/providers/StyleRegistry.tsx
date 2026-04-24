@@ -1,38 +1,21 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useServerInsertedHTML } from 'next/navigation';
-import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
+import { StyleSheetManager } from 'styled-components';
 
+// Redirect all styled-components style injections to a body-div portal so they never
+// touch document.head. React 19 owns head reconciliation; any foreign insertions/removals
+// there trigger NotFoundError on navigation. The #__page-loader overlay covers the brief
+// unstyled window during hydration, so there is no visible FOUC.
 export default function StyleRegistry({ children }: { children: React.ReactNode }) {
-  const [sheet] = useState(() => new ServerStyleSheet());
-
-  // On the client, inject into a stable body-div to avoid React 19 head-management conflicts.
-  // document.getElementById runs synchronously in useState so it resolves on the first render.
-  const [clientTarget] = useState<HTMLElement | null>(() => {
+  const [target] = useState<HTMLElement | null>(() => {
     if (typeof window === 'undefined') return null;
     return document.getElementById('__sc');
   });
 
-  useServerInsertedHTML(() => {
-    const styles = sheet.getStyleElement();
-    sheet.instance.clearTag();
-    return <>{styles}</>;
-  });
-
-  // Server-side: collect styles via ServerStyleSheet
-  if (typeof window === 'undefined') {
+  if (target) {
     return (
-      <StyleSheetManager sheet={sheet.instance}>
-        {children}
-      </StyleSheetManager>
-    );
-  }
-
-  // Client-side: redirect all injections to the body portal
-  if (clientTarget) {
-    return (
-      <StyleSheetManager target={clientTarget} disableCSSOMInjection>
+      <StyleSheetManager target={target} disableCSSOMInjection>
         {children}
       </StyleSheetManager>
     );
