@@ -59,6 +59,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <span className="__loader-dot" />
           </div>
         </div>
+        {/* styled-components portal — styles injected here to avoid React 19 head conflicts */}
+        <div id="__sc" />
         <StyleRegistry>
           <Providers>
             <PageLoaderDismiss />
