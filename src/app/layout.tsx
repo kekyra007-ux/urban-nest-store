@@ -6,6 +6,7 @@ import Toaster from '@/widgets/Toaster';
 import CartDrawer from '@/widgets/CartDrawer';
 import { PageLoaderDismiss } from '@/shared/ui/PageLoader';
 import { Providers } from './providers/Providers';
+import StyleRegistry from './providers/StyleRegistry';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -58,14 +59,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <span className="__loader-dot" />
           </div>
         </div>
-        <Providers>
-          <PageLoaderDismiss />
-          <Header />
-          {children}
-          <Footer />
-          <Toaster />
-          <CartDrawer />
-        </Providers>
+        <StyleRegistry>
+          <Providers>
+            <PageLoaderDismiss />
+            <Header />
+            {children}
+            <Footer />
+            <Toaster />
+            <CartDrawer />
+          </Providers>
+        </StyleRegistry>
       </body>
     </html>
   );
